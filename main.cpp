@@ -4,8 +4,8 @@
 template<class T, size_t K>
 struct BTree {
   T val[K];
-  BTree<T, K>*	childs[K + 1];
-  BTree<T, K>*	parent;
+  BTree<T, K>* childs[K + 1];
+  BTree<T, K>* parent;
 };
 
 template<class T, size_t K>
