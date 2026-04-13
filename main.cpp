@@ -52,5 +52,5 @@ BTreeIt<T, K> next(BTreeIt<T, K> it) {
 			return *(it.current->childs[i]);
 		}
 	}
-	return *(it.current->childs[K]);
+	return it.current->childs[K];
 }
