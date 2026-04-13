@@ -54,3 +54,112 @@ BTreeIt<T, K> next(BTreeIt<T, K> it) {
   }
   return *(it.current->childs[K]);
 }
+
+
+#include <iostream>
+
+template<class T>
+struct BiTree
+{
+ T val;
+ BiTree<T> *lt, *rt, *parent;
+};
+
+template<class T, class F>
+BiTree<T> *minimum(BiTree<T> *root)
+{
+ if (!root)
+ {
+  return root;
+ }
+ while (root->lt)
+ {
+  root = root->lt;
+ }
+ return root;
+}
+
+template<class T, class F>
+F traverse(BiTree<T> *root, F f)
+{
+ if (!root)
+ {
+  return f;
+ }
+ BiTree<T> *next = minimum(root);
+ while (next)
+ {
+  f(next->val);
+  if (next->rt)
+  {
+   next = next->rt;
+   next = minimum(next);
+  }
+  else
+  {
+   BiTree<T> *parent = next->parent;
+   while (parent && parent->lt == next)
+   {
+    next = parent;
+    parent = parent->parent;
+   }
+  }
+ }
+ return f;
+}
+
+template<class T>
+bool hasnext(BiTree<T> *root) {
+ return root->lt || root->rt;
+}
+
+template<class T>
+bool hasparent(BiTree<T> *root) {
+ return root->parent;
+}
+template<class T>
+struct TriTree {
+ T val0, val1;
+ TriTree<T> *lt, *rt, *mid, *parent;
+};
+
+template<class T>
+struct TriTreeIt {
+ size_t s;
+ TriTree<T> *curr;
+};
+
+template<class T>
+T& value(TriTreeIt<T> it) {
+ return it.curr->val;
+}
+
+template<class T>
+bool hasNext(TriTreeIt<T> it) {
+ return it.curr->lt || it.curr->rt || it.curr->mid;
+}
+
+template<class T>
+bool hasPrev(TriTreeIt<T> it) {
+ return it.curr->parent;
+}
+
+template<class T>
+TriTreeIt<T> next(TriTreeIt<T> it) {
+ if (hasNext(it)) {
+  return (it.curr->lt == nullptr ? it.curr->lt : it.curr->mid == nullptr ? it.curr->mid : it.curr->rt);
+ }
+ return it;
+}
+
+template<class T>
+TriTreeIt<T> prev(TriTreeIt<T> it) {
+ if (hasPrev(it)) {
+  return it.curr->parent;
+ }
+ return it;
+}
+
+int main() {
+
+}
