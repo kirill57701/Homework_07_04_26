@@ -16,7 +16,7 @@ struct BTreeIt {
 
 template<class T, size_t K>
 T value(BTreeIt<T, K> it) {
-	if (it.current == nullptr || it.s > K) {
+	if (it.current == nullptr || it.s >= K) {
 		throw std::logic_error();
 	}
 	return it.current->val[it.s];
@@ -24,27 +24,22 @@ T value(BTreeIt<T, K> it) {
 
 template<class T, size_t K>
 bool hasNext(BTreeIt<T, K> it) {
-	if (it.current == nullptr || it.s > K) {
-		throw std::logic_error();
-	}
-	if (it.s < K) {
+  if (it.current == nullptr || it.s +1 >= K) {
+  	return 0;
+  }
+  if (it.s + 1 < K) {
+  	return 1;
+  }
+	if (it.current->childs[it.s + 1] != nullptr) {
 		return 1;
 	}
-	for (size_t i = 0; i < K +1; ++i) {
-		if (it.current->childs[i] != nullptr) {
-			return 1;
-		}
-	}
-	return 0;
+	return 1;
 }
 
 /*template<class T, size_t K>
 BTreeIt<T, K> next(BTreeIt<T, K> it) {
 	if (it.current == nullptr || it.s > K) {
 		throw std::logic_error();
-	}
-	if (it.s < K) {
-		return it.current->val[++it.s];
 	}
 
 }*/
