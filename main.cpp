@@ -24,7 +24,7 @@ T value(BTreeIt<T, K> it) {
 
 template<class T, size_t K>
 bool hasNext(BTreeIt<T, K> it) {
-	if (it.current == nullptr || s > K) {
+	if (it.current == nullptr || it.s > K) {
 		throw std::logic_error();
 	}
 	if (it.s < K) {
