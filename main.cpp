@@ -33,7 +33,7 @@ bool hasNext(BTreeIt<T, K> it) {
 	if (it.current->childs[it.s + 1] != nullptr) {
 		return 1;
 	}
-	return 0;
+	return 0; 
 }
 
 template<class T, size_t K>
@@ -52,5 +52,5 @@ BTreeIt<T, K> next(BTreeIt<T, K> it) {
 			return *(it.current->childs[i]);
 		}
 	}
-	return it.current->childs[K];
+  return *(it.current->childs[K]);
 }
