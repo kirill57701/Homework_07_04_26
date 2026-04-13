@@ -55,16 +55,20 @@ BTreeIt<T, K> next(BTreeIt<T, K> it) {
   return *(it.current->childs[K]);
 }
 
+template<class T, size_t K>
+bool hasPrev(BItreeIt<T, K> it) {
+	return it.current->parent != nullptr;
+}
 
-#include <iostream>
+template<class T, size_t K>
+BItreeIt<T, K> prev(BTreeIt<T, K> it) {
+	if (!hasPrev(it)) {
+		throw std::logic_error("err");
+	}
+	return *(it.current->parent);
+}
 
-template<class T>
-struct BiTree
-{
- T val;
- BiTree<T> *lt, *rt, *parent;
-};
-
+/* всё ниже этой строчки было на паре написано*/
 template<class T, class F>
 BiTree<T> *minimum(BiTree<T> *root)
 {
@@ -158,8 +162,4 @@ TriTreeIt<T> prev(TriTreeIt<T> it) {
   return it.curr->parent;
  }
  return it;
-}
-
-int main() {
-
 }
