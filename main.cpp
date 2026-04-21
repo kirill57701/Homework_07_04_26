@@ -101,7 +101,13 @@ bool IsEqualStruct(BiTree<T>* lhs, BiTree<T>* rhs) {
   }
   auto ln = nextStruct(lhs_begin.second);
   auto rn = nextStruct(rhs_begin.second);
-
+  while (std::get<0>(ln) == std::get<0>(rn) &&
+    std::get<1>(ln) == std::get<1>(rn) &&
+    std::get<2>(ln) == std::get<2>(rn)) {
+    ln = nextStruct(std::get<2>(ln));
+    rn = nextStruct(std::get<2>(rn));
+  }
+  return ln == rn;
 }
 
 template<class T>
