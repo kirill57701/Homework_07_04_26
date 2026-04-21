@@ -138,6 +138,7 @@ bool includedStructStart(BiTree<T>* lhs_root, BiTree<T>* pattern) {
       }
     }
   }
+  return !std::get<2>(next_pattern) && std::get<1>(next_pattern) == next_lhs.first;
 }
 
 template<class T, class F>
