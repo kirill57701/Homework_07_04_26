@@ -120,12 +120,22 @@ std::tuple<Dir, size_t T, BiTree<T>*> nextStruct(BiTree<T>* root) {
 }
 
 template<class T>
-bool includedStruct(BiTree<T>* lhs_root, BiTree<T>* pattern) {
+bool includedStructStart(BiTree<T>* lhs_root, BiTree<T>* pattern) {
   auto next_pattern = nextStruct(pattern);
   if (std::get<0>(next_pattern) == Dir::fall_left) {
     auto next_lhs = fall_left(lhs_root);
     if (std::get<1>(next_pattern) != std::get<1>(next_pattern)) {
       return 0;
+    } else {
+      next_lhs = parent(lhs_root);
+    }
+    while (std::get<0>(next_pattern) == Dir::fall_left) {
+      next_pattern = nextStruct(std::get<2>(next_pattern));
+      if (std::get<0>(next_pattern) == Dit::fall_left) {
+        next_lhs = fall_left(lhs_root);
+      } else {
+        next_lhs = parent(lhs_root);
+      }
     }
   }
 }
