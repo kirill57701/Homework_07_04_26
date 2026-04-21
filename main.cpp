@@ -119,6 +119,17 @@ std::tuple<Dir, size_t T, BiTree<T>*> nextStruct(BiTree<T>* root) {
   auto result = parent(root);
 }
 
+template<class T>
+bool includedStruct(BiTree<T>* lhs_root, BiTree<T>* pattern) {
+  auto next_pattern = nextStruct(pattern);
+  if (std::get<0>(next_pattern) == Dir::fall_left) {
+    auto next_lhs = fall_left(lhs_root);
+    if (std::get<1>(next_pattern) != std::get<1>(next_pattern)) {
+      return 0;
+    }
+  }
+}
+
 template<class T, class F>
 BiTree<T> *minimum(BiTree<T> *root)
 {
