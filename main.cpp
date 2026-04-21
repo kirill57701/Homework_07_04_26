@@ -69,6 +69,26 @@ BItreeIt<T, K> prev(BTreeIt<T, K> it) {
 }
 
 /* всё ниже этой строчки было на паре написано*/
+template<class T>
+std::pair<size_t, BiTree<T>*> fall_left(BiTree<T>* root) {
+  size_t path = 0;
+  while(root->lt) {
+    root = root->lt;
+    path++;
+  }
+  return {path, root};
+}
+
+template<class T>
+std::pair<size_t, BiTree<T>*> parent(BiTree<T>* root) {
+  size_t path = 0;
+  BiTree<T>* parent = root->parent;
+  while (parent && parent->lt != root) {
+    path++;
+  }
+  return {path, parent};
+}
+
 template<class T, class F>
 BiTree<T> *minimum(BiTree<T> *root)
 {
