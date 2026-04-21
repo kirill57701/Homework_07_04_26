@@ -57,15 +57,15 @@ BTreeIt<T, K> next(BTreeIt<T, K> it) {
 
 template<class T, size_t K>
 bool hasPrev(BItreeIt<T, K> it) {
-	return it.current->parent != nullptr;
+  return it.current->parent != nullptr;
 }
 
 template<class T, size_t K>
 BItreeIt<T, K> prev(BTreeIt<T, K> it) {
-	if (!hasPrev(it)) {
-		throw std::logic_error("err");
-	}
-	return *(it.current->parent);
+  if (!hasPrev(it)) {
+    throw std::logic_error("err");
+  }
+  return *(it.current->parent);
 }
 
 /* всё ниже этой строчки было на паре написано*/
@@ -82,11 +82,35 @@ std::pair<size_t, BiTree<T>*> fall_left(BiTree<T>* root) {
 template<class T>
 std::pair<size_t, BiTree<T>*> parent(BiTree<T>* root) {
   size_t path = 0;
+  if (!root) {
+    return {path, nullptr};
+  }
   BiTree<T>* parent = root->parent;
   while (parent && parent->lt != root) {
     path++;
   }
   return {path, parent};
+}
+
+template<class T>
+bool IsEqualStruct(BiTree<T>* lhs, BiTree<T>* rhs) {
+  auto lhs_begin = fall_left(lhs);
+  auto rhs_begin = fall_left(rhs);
+  if (lhs_begin.first != rhs_begin.first) {
+    return 0;
+  }
+  auto ln = nextStruct(lhs_begin.second);
+  auto rn = nextStruct(rhs_begin.second);
+
+}
+
+template<class T>
+std::tuple<Dir, size_t T, BiTree<T>*> nextStruct(BiTree<T>* root) {
+  if (root->rt) {
+    auto res = fall_left(root->rt);
+    return {Dir::fall_left, result.first, result.second};
+  }
+  auto result = parent(root);
 }
 
 template<class T, class F>
