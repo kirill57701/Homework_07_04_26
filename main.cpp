@@ -301,7 +301,7 @@ inclusion(
     }
     lhs_curr = nextStruct(lhs_curr).second;
   }
-  return false; 
+  return false;
 }
 
 template< class T >
